@@ -20,4 +20,19 @@ function dropdown(){
 };
 dropdown();
 
+// Build metadata
+function metadata(sampleID){
+    d3.json("samples.json").then((sampledata)=>{
+        var metaData = sampledata.metadata;
+        var dataArray = metaData.filter(row=>row.id==sampleID);
+        console.log(dataArray);
+        var mainData = dataArray[0];
+        var demoDisplay = d3.select("#sample-metadata");
+        demoDisplay.html("");
+        Object.entries(mainData).forEach(([key,value])=>{
+            demoDisplay.append("h6").text(`${key} ${value}`);
+    });
+});
+};
+
 
